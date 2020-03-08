@@ -11,7 +11,7 @@ The tools include the LB-LMC C++ Solver Code Generation C++ Library along with a
 
 ## Requirements
 
-These tools requires C++14 or higher to build.
+These tools require C++14 or higher to build.
 
 Besides the C++ standard library, the tools depend on the following third-party libaries to compile:
 
