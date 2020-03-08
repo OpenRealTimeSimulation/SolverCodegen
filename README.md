@@ -53,9 +53,9 @@ url: https://ieeexplore.ieee.org/document/7894204
 ## Acknowledgements
 * Matthew Milton - solver codegen tools creator and lead developer
 * Andrea Benigni - original creator of the LB-LMC method
-* Michele Difronzo - component model developer, software tester
+* Michele Difronzo - component model developer and software tester
 * Dhiman Chowdhury - component model developer
-* Mark Vygoder - component model developer, software tester
+* Mark Vygoder - component model developer and software tester
 
 
 
