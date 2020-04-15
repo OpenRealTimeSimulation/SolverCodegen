@@ -1,3 +1,5 @@
+<img src="./ortis_logo_600dpi.png" width="300"/>
+
 # ORTiS Solver C++ Code Generation Tools
 C++ code generation tools for CPU or FPGA simulation solvers of nonlinear electrical and power electronic systems
 
