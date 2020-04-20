@@ -216,6 +216,13 @@ std::string BridgeConverter_3LegIdealSwitchesAntiParallelDiodes::generateFields(
 	generatePersistentField(sstrm, "conduct_lower_b_past", 0.0);
 	generatePersistentField(sstrm, "conduct_lower_c_past", 0.0);
 
+	generatePersistentField(sstrm, "diode_conduct_upper_a_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_upper_b_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_upper_c_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_lower_a_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_lower_b_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_lower_c_past", 0.0);
+
 		//generate temporaries
 
 	generateTemporaryField(sstrm, "vp"           , 0.0);
@@ -281,6 +288,13 @@ std::string BridgeConverter_3LegIdealSwitchesAntiParallelDiodes::generateFields(
 	generateTemporaryBooleanField(sstrm, "conduct_lower_c", false);
 	generateTemporaryBooleanField(sstrm, "gate_upper_c"   , false);
 	generateTemporaryBooleanField(sstrm, "gate_lower_c"   , false);
+
+	generateTemporaryBooleanField(sstrm, "diode_conduct_upper_a", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_lower_a", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_upper_b", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_lower_b", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_upper_c", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_lower_c", false);
 
 	return sstrm.str();
 
@@ -416,59 +430,73 @@ R"(
 	vstar_c = real(1.0/2.0)*(vcp_past + vcn_past) + vg - (RSW/real(2.0))*ilc_past;
 
 		//determine conduction of switches+diodes
-	if(conduct_upper_a_past)
+
+			//LEG A
+
+    if(diode_conduct_upper_a_past)
 	{
-		conduct_upper_a = gate_upper_a || (ila_past < ITH);
+		diode_conduct_upper_a = (ila_past <= ITH);
 	}
 	else
 	{
-		conduct_upper_a = gate_upper_a || (vstar_a_past-vcpg_past >= VTH);
+		diode_conduct_upper_a = (vstar_a_past-vcpg_past >= VTH);
 	}
 
-	if(conduct_lower_a_past)
+	if(diode_conduct_lower_a_past)
 	{
-		conduct_lower_a = gate_lower_a || (ila_past > ITH);
+		diode_conduct_lower_a = (ila_past >= ITH);
 	}
 	else
 	{
-		conduct_lower_a = gate_lower_a || (vcng_past-vstar_a_past >= VTH);
+		diode_conduct_lower_a = (vcng_past-vstar_a_past >= VTH);
 	}
 
-	if(conduct_upper_b_past)
+			//LEG B
+
+	if(diode_conduct_upper_b_past)
 	{
-		conduct_upper_b = gate_upper_b || (ilb_past < ITH);
+		diode_conduct_upper_b = (ilb_past <= ITH);
 	}
 	else
 	{
-		conduct_upper_b = gate_upper_b || (vstar_b_past-vcpg_past >= VTH);
+		diode_conduct_upper_b = (vstar_b_past-vcpg_past >= VTH);
 	}
 
-	if(conduct_lower_b_past)
+	if(diode_conduct_lower_b_past)
 	{
-		conduct_lower_b = gate_lower_b || (ilb_past > ITH);
+		diode_conduct_lower_b = (ilb_past >= ITH);
 	}
 	else
 	{
-		conduct_lower_b = gate_lower_b || (vcng_past-vstar_b_past >= VTH);
+		diode_conduct_lower_b = (vcng_past-vstar_b_past >= VTH);
 	}
 
-	if(conduct_upper_c_past)
+			//LEG C
+
+	if(diode_conduct_upper_c_past)
 	{
-		conduct_upper_c = gate_upper_c || (ilc_past < ITH);
+		diode_conduct_upper_c = (ilc_past <= ITH);
 	}
 	else
 	{
-		conduct_upper_c = gate_upper_c || (vstar_c_past-vcpg_past >= VTH);
+		diode_conduct_upper_c = (vstar_c_past-vcpg_past >= VTH);
 	}
 
-	if(conduct_lower_c_past)
+	if(diode_conduct_lower_c_past)
 	{
-		conduct_lower_c = gate_lower_c || (ilc_past > ITH);
+		diode_conduct_lower_c = (ilc_past >= ITH);
 	}
 	else
 	{
-		conduct_lower_c = gate_lower_c || (vcng_past-vstar_c_past >= VTH);
+		diode_conduct_lower_c = (vcng_past-vstar_c_past >= VTH);
 	}
+
+	conduct_upper_a = gate_upper_a || diode_conduct_upper_a;
+	conduct_upper_b = gate_upper_b || diode_conduct_upper_b;
+	conduct_upper_c = gate_upper_c || diode_conduct_upper_c;
+	conduct_lower_a = gate_lower_a || diode_conduct_lower_a;
+	conduct_lower_b = gate_lower_b || diode_conduct_lower_b;
+	conduct_lower_c = gate_lower_c || diode_conduct_lower_c;
 
 
 		//leg A
@@ -639,6 +667,13 @@ R"(
     conduct_upper_c_past = conduct_upper_c;
     conduct_lower_c_past = conduct_lower_c;
 
+    diode_conduct_upper_a_past = diode_conduct_upper_a;
+    diode_conduct_lower_a_past = diode_conduct_lower_a;
+    diode_conduct_upper_b_past = diode_conduct_upper_b;
+    diode_conduct_lower_b_past = diode_conduct_lower_b;
+    diode_conduct_upper_c_past = diode_conduct_upper_c;
+    diode_conduct_lower_c_past = diode_conduct_lower_c;
+
 		//update resistive companion source contributions of component
 
 	bpos = vcp*GIN;
@@ -756,7 +791,19 @@ std::string BridgeConverter_3LegIdealSwitchesAntiParallelDiodes::generateUpdateB
             "conduct_upper_c_past" ,
             "conduct_lower_a_past" ,
             "conduct_lower_b_past" ,
-            "conduct_lower_c_past"
+            "conduct_lower_c_past" ,
+            "diode_conduct_upper_a_past" ,
+            "diode_conduct_upper_b_past" ,
+            "diode_conduct_upper_c_past" ,
+            "diode_conduct_lower_a_past" ,
+            "diode_conduct_lower_b_past" ,
+            "diode_conduct_lower_c_past",
+            "diode_conduct_upper_a" ,
+            "diode_conduct_upper_b" ,
+            "diode_conduct_upper_c" ,
+            "diode_conduct_lower_a" ,
+            "diode_conduct_lower_b" ,
+            "diode_conduct_lower_c"
 		}
 	);
 
