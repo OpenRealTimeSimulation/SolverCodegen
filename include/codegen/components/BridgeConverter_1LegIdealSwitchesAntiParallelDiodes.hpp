@@ -50,14 +50,15 @@ class BridgeConverter_1LegIdealSwitchesAntiParallelDiodes : public Component
 
 private:
 
-	double DT;
-	double RIN;
-	double GIN;
-	double RSW;
-	double R;
-	double C;
-	double L;
-	double VTH;
+	double DT;   ///< time step length (s)
+	double RIN;  ///< DC capacitor side input terminal resistance
+	double GIN;  ///< inverse of RIN (DC capacitor side input terminal resistance)
+	double RSW;  ///< conducting resistance of ideal switch, diode
+	double R;    ///< series resistance of AC/DC inductor side terminal
+	double C;    ///< DC capacitor side capacitance
+	double L;    ///< AC/DC inductor side inductance
+	double VTH;  ///< forward bias threshold voltage for switch diode to conduct; not voltage drop of diode (diode is ideal switch)
+	double ITH;  ///< forward bias threshold current for switch diode to conduct; set to constant 0.0 always
 
 	unsigned int P, G, N, A;
 	unsigned int source_id_P, source_id_N, source_id_A;
