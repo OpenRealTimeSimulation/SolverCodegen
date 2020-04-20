@@ -1,6 +1,9 @@
 <img src="./ortis_logo_300dpi.png" width="300"/>
 
 # ORTiS Solver C++ Code Generation Tools
+
+Copyright (C) Matthew Milton and Others
+
 C++ code generation tools for CPU or FPGA simulation solvers of nonlinear electrical and power electronic systems
 
 These tools are part of the Open Real-Time Simulation (ORTiS) framework.
