@@ -47,6 +47,7 @@ BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::BridgeConverter_1LegIdealSw
 	C(1.0),
 	L(1.0),
 	VTH(1.0),
+	ITH(0.0),
 	P(0), G(0), N(0), A(0),
 	source_id_P(0), source_id_N(0),
 	source_id_A(0)
@@ -75,6 +76,7 @@ BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::BridgeConverter_1LegIdealSw
 	C(dc_filter_capacitance),
 	L(leg_inductance),
 	VTH(diode_threshold_voltage),
+	ITH(0.0),
 	P(0), G(0), N(0), A(0),
 	source_id_P(0), source_id_N(0),
 	source_id_A(0)
@@ -100,6 +102,7 @@ BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::BridgeConverter_1LegIdealSw
 	C(base.C),
 	L(base.L),
 	VTH(base.VTH),
+	ITH(base.ITH),
 	P(base.P), G(base.G), N(base.N), A(base.A),
 	source_id_P(base.source_id_P), source_id_N(base.source_id_N),
 	source_id_A(base.source_id_A)
@@ -174,6 +177,7 @@ std::string BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::generateParamet
     generateParameter(sstrm, "C"   , C);
     generateParameter(sstrm, "L"   , L);
     generateParameter(sstrm, "VTH" , VTH);
+    generateParameter(sstrm, "ITH" , ITH);
 
 	return sstrm.str();
 }
@@ -192,6 +196,10 @@ std::string BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::generateFields(
 	generatePersistentField(sstrm, "vcn_past", 0.0);
 	generatePersistentField(sstrm, "ila_past", 0.0);
 	generatePersistentField(sstrm, "ila_der_past" , 0.0);
+	generatePersistentField(sstrm, "conduct_upper_a_past", 0.0);
+	generatePersistentField(sstrm, "conduct_lower_a_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_upper_a_past", 0.0);
+	generatePersistentField(sstrm, "diode_conduct_lower_a_past", 0.0);
 
 		//generate temporaries
 
@@ -209,10 +217,24 @@ std::string BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::generateFields(
 	generateTemporaryField(sstrm, "vstar_a_past" , 0.0);
 	generateTemporaryField(sstrm, "ila_der"      , 0.0);
 
+		//switching functional elements seen by DC filter capacitors
+	generateTemporaryField(sstrm, "sfi_pa", 0.0);
+	generateTemporaryField(sstrm, "sfi_na", 0.0);
+
+		//switching function elements seen by leg filter inductors
+	generateTemporaryField(sstrm, "sfvg_a"     , 0.0);
+	generateTemporaryField(sstrm, "sfvcp_a"    , 0.0);
+	generateTemporaryField(sstrm, "sfvcn_a"    , 0.0);
+	generateTemporaryField(sstrm, "sfvstar_a"  , 0.0);
+	generateTemporaryField(sstrm, "sfrswrol_a" , 0.0);
+
 	generateTemporaryBooleanField(sstrm, "conduct_upper_a", false);
 	generateTemporaryBooleanField(sstrm, "conduct_lower_a", false);
 	generateTemporaryBooleanField(sstrm, "gate_upper_a"   , false);
 	generateTemporaryBooleanField(sstrm, "gate_lower_a"   , false);
+
+	generateTemporaryBooleanField(sstrm, "diode_conduct_upper_a", false);
+	generateTemporaryBooleanField(sstrm, "diode_conduct_lower_a", false);
 
 	return sstrm.str();
 
@@ -322,54 +344,94 @@ R"(
 	vcpg_past = vcp_past + vg;
 	vcng_past = vcn_past + vg;
 	vstar_a_past = vla_past + (ila_past*R) + va;
+	vstar_a = real(1.0/2.0)*(vcp_past + vcn_past) + vg - (RSW/real(2.0))*ila_past;
 
 		//determine conduction of switches+diodes
 
-	conduct_upper_a = gate_upper_a || (vstar_a_past-vcpg_past >= VTH);
-	conduct_lower_a = gate_lower_a || (vcng_past-vstar_a_past >= VTH);
+	if(diode_conduct_upper_a_past)
+	{
+		diode_conduct_upper_a = (ila_past <= ITH);
+	}
+	else
+	{
+		diode_conduct_upper_a = (vstar_a_past-vcpg_past >= VTH);
+	}
+
+	if(diode_conduct_lower_a_past)
+	{
+		diode_conduct_lower_a = (ila_past >= ITH);
+	}
+	else
+	{
+		diode_conduct_lower_a = (vcng_past-vstar_a_past >= VTH);
+	}
+
+	conduct_upper_a = gate_upper_a || diode_conduct_upper_a;
+	conduct_lower_a = gate_lower_a || diode_conduct_lower_a;
 
 		//update states of component based on conduction
 
 	if ( (conduct_upper_a==true) && (conduct_lower_a==false) )  // upper conducting
 	{
 
-		vcp = vcp_past + DT*( (real(1.0)/C/RIN)*(vp - vcp_past - vg) - (real(1.0)/C)*ila_past );
-		vcn = vcn_past + DT*( (real(1.0)/C/RIN)*(vn - vcn_past - vg) );
-		ila_der = (real(1.0)/L)*(vg + vcp_past - va) - (RSW/L + R/L)*ila_past;
-		ila = ila_past + DT*( ila_der );
+		sfi_pa     = ila_past;
+		sfi_na     = real(0.0);
+
+		sfvg_a     = vg;
+		sfvcp_a    = vcp_past;
+		sfvcn_a    = real(0.0);
+		sfvstar_a  = real(0.0);
+		sfrswrol_a = (RSW/L + R/L);
 
 	}
 
     else if ( (conduct_upper_a==false) && (conduct_lower_a==true) )  // lower conducting
 	{
 
-		vcp = vcp_past + DT*( (real(1.0)/C/RIN)*(vp - vcp_past - vg) );
-		vcn = vcn_past + DT*( (real(1.0)/C/RIN)*(vn - vcn_past - vg) - (real(1.0)/C)*ila_past );
-		ila_der = (real(1.0)/L)*(vg + vcn_past - va) - (RSW/L + R/L)*ila_past;
-		ila = ila_past + DT*( ila_der );
+		sfi_pa = real(0.0);
+		sfi_na = ila_past;
+
+		sfvg_a     = vg;
+		sfvcp_a    = real(0.0);
+		sfvcn_a    = vcn_past;
+		sfvstar_a  = real(0.0);
+		sfrswrol_a = (RSW/L + R/L);
 
 	}
 
     else if ( (conduct_upper_a==false) && (conduct_lower_a==false) ) // none conducting (deadtime)
 	{
 
-		vcp = vcp_past + DT*( (real(1.0)/C/RIN)*(vp - vcp_past - vg) );
-		vcn = vcn_past + DT*( (real(1.0)/C/RIN)*(vn - vcn_past - vg) );
-		ila_der = (real(1.0)/L)*(vg-va) - (R/L)*ila_past;
-		ila = ila_past + DT*( ila_der );
+		sfi_pa = real(0.0);
+		sfi_na = real(0.0);
+
+		sfvg_a     = real(0.0); //vg;
+		sfvcp_a    = real(0.0);
+		sfvcn_a    = real(0.0);
+		sfvstar_a  = va;        //real(0.0);
+		sfrswrol_a = real(0.0); //(R/L);
+		ila_past = real(0.0);
 
 	}
 
     else // ( (conduct_upper_a==true) && (conduct_lower_a==true) )   // both conducting (short)
 	{
 
-		vstar_a = real(1.0/2.0)*(vcp_past + vcn_past) + vg - (RSW/real(2.0))*ila_past;
-		vcp = vcp_past + DT*( (real(1.0)/RIN/C)*(vp-vcp_past-vg) - (real(1.0)/C/RSW)*(vcp_past + vg - vstar_a ) );
-		vcn = vcn_past + DT*( (real(1.0)/RIN/C)*(vn-vcn_past-vg) - (real(1.0)/C/RSW)*(vcn_past + vg - vstar_a ) );
-		ila_der = (real(1.0)/L)*(vstar_a - R*ila_past - va);
-		ila = ila_past + DT*( ila_der );
+		sfi_pa = (real(1.0)/RSW)*(vcp_past + vg - vstar_a);
+		sfi_na = (real(1.0)/RSW)*(vcn_past + vg - vstar_a);
+
+		sfvg_a     = real(0.0);
+		sfvcp_a    = real(0.0);
+		sfvcn_a    = real(0.0);
+		sfvstar_a  = vstar_a;
+		sfrswrol_a = (R/L);
 
 	}
+
+	vcp = vcp_past + DT*( (real(1.0)/C/RIN)*(vp-vcp_past-vg) + (real(1.0)/C)*(- sfi_pa ) );
+	vcn = vcn_past + DT*( (real(1.0)/C/RIN)*(vn-vcn_past-vg) + (real(1.0)/C)*(- sfi_na ) );
+	ila_der = (real(1.0)/L)*(sfvg_a + sfvcp_a + sfvcn_a + sfvstar_a - va) - sfrswrol_a*ila_past;
+	ila = ila_past + DT*ila_der;
 
 		//update state registers for next time step
 
@@ -377,6 +439,12 @@ R"(
 	vcn_past = vcn;
 	ila_past = ila;
 	ila_der_past = ila_der;
+
+	conduct_upper_a_past = conduct_upper_a;
+    conduct_lower_a_past = conduct_lower_a;
+
+    diode_conduct_upper_a_past = diode_conduct_upper_a;
+    diode_conduct_lower_a_past = diode_conduct_lower_a;
 
 		//update resistive companion source contributions of component
 
@@ -411,7 +479,8 @@ std::string BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::generateUpdateB
 			"R"   ,
 			"C"   ,
 			"L"   ,
-			"VTH"
+			"VTH" ,
+			"ITH"
 		}
 	);
 
@@ -441,7 +510,20 @@ std::string BridgeConverter_1LegIdealSwitchesAntiParallelDiodes::generateUpdateB
 			"conduct_upper_a",
             "conduct_lower_a",
             "gate_upper_a"   ,
-            "gate_lower_a"
+            "gate_lower_a"   ,
+            "sfi_pa"         ,
+            "sfi_na"         ,
+            "sfvg_a"     ,
+            "sfvcp_a"    ,
+            "sfvcn_a"    ,
+            "sfvstar_a"  ,
+            "sfrswrol_a" ,
+            "conduct_upper_a_past" ,
+            "conduct_lower_a_past" ,
+            "diode_conduct_upper_a_past" ,
+            "diode_conduct_lower_a_past" ,
+            "diode_conduct_upper_a" ,
+            "diode_conduct_lower_a"
 		}
 	);
 
