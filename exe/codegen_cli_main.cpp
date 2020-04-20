@@ -39,7 +39,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #define TOSTRING(x) STRINGFY(x)
 
 const static std::string PROGRAM_TITLE =
-"LB-LMC Solver C++ Code Generator";
+"ORTiS Solver C++ Code Generator";
 
 const static std::string PROGRAM_VERSION =
 "Version: " TOSTRING(VERSION) //VERSION defined outside of code (-D argument of gcc tools)
@@ -108,14 +108,14 @@ R"(
 This tool generates C++ source code for solvers of multi-physics networked systems such as
 electrical, power electronic, and energy conversion systems.  These systems are defined with a
 netlist file which is input to this tool.  The solver algorithm used is the
-Latency-Based Linear Multi-step Compound (LB-LMC) method, hence name of the tool.
+Latency-Based Linear Multi-step Compound (LB-LMC) method.
 
-LB-LMC Solver C++ Code Generator uses Eigen 3 Linear Algebra C++ Template Library
+ORTiS Solver C++ Code Generator uses Eigen 3 Linear Algebra C++ Template Library
 <http://eigen.tuxfamily.org/index.php?title=Main_Page>
 
 Acknowledgements:
 
-Matthew Milton   -- LB-LMC Code Generation Library and Tool Creator, Lead Developer and Director
+Matthew Milton   -- ORTiS Code Generation Library and Tool Creator, Lead Developer and Director
 Andrea Benigni   -- Original LB-LMC Solver Algorithm Creator
 Michele Difronzo -- Component Model Developer, Software Tester, Feature Requester
 Mark Vygoder     -- Component Model Developer, Software Tester, Feature Requester
