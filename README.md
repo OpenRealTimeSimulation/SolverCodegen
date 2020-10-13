@@ -1,6 +1,6 @@
 <img src="./ortis_logo_300dpi.png" width="300"/>
 
-# ORTiS LB-LMC Solver C++ Code Generation Tools for Real-Time Simulation of Power Electronic Systems 
+# ORTiS Solver C++ Code Generation Tools for Real-Time Simulation of Power Electronic Systems 
 
 Copyright (C) 2019-2020 Matthew Milton and Others
 
