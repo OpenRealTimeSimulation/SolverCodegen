@@ -78,11 +78,11 @@ url: https://ieeexplore.ieee.org/document/7894204
  * Milton, M. A.(2016). *A Comparison Of FPGA Implementation Of Latency-Based Solvers For Power Electronic System Real-Time Simulation*. (Master's thesis). Retrieved from https://scholarcommons.sc.edu/etd/3903
 
 ## Acknowledgements
-* Matthew Milton - solver codegen tools creator and lead developer
-* Andrea Benigni - original creator of the LB-LMC method
-* Michele Difronzo - component model developer and software tester
-* Dhiman Chowdhury - component model developer
-* Mark Vygoder - component model developer and software tester
+* Matthew Milton (University of South Carolina) - solver codegen tools creator and lead developer
+* Andrea Benigni (FZ-Juelich) - original creator of the LB-LMC method
+* Michele Difronzo (University of South Carolina) - component model developer and software tester
+* Dhiman Chowdhury (University of South Carolina) - component model developer
+* Mark Vygoder (University of Wisconsin-Milwaukee) - component model developer and software tester
 
 
 
