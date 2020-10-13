@@ -1,0 +1,131 @@
+% ORTiS LB-LMC solver codegen tools netlist for 
+% a zonal dual-bus shipboard power electronics system
+%
+% Matthew Milton
+% 2020
+
+% -- PARAMETERS OF MODEL --
+
+#name shipboard_zonal_system
+
+#const DT 50.0e-9
+#const DC_VG 10000.0
+#const DC_RG 0.0001
+#const DCDC_CIN 0.001
+#const DCDC_CFILT 0.0001
+#const DCDC_LFILT 0.0001
+#const DCDC_RFILT 0.0001
+#const DCDC_HIGHZ 1.0e6
+#const CABLE_L 1.0e-6
+#const CABLE_R 0.01
+#const INV_CIN 0.001
+#const INV_CFILT 1.0e-6
+#const INV_LFILT 0.0001
+#const INV_RFILT 0.0
+#const LOAD_R 7.0
+
+% -- COMPONENT LISTINGS OF MODEL --
+
+% DC generator sources
+
+VoltageSource dc_src1(DC_VG, DC_RG) {1,0}
+VoltageSource dc_src2(DC_VG, DC_RG) {0,2}
+
+% DC/DC bus converters and their output filtering
+
+BridgeConverter3LegIdealSwitches dcdc1(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {1,2,3,19,55}
+Resistor dcdc1_highz(DCDC_HIGHZ) {55,0}
+
+Capacitor dcdc_c01(DT, DCDC_CFILT) {3,0}
+Capacitor dcdc_c02(DT, DCDC_CFILT) {0,19}
+
+BridgeConverter3LegIdealSwitches dcdc2(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {35,36,11,27,56}
+Resistor dcdc2_highz(DCDC_HIGHZ) {56,0}
+
+Capacitor dcdc_c03(dt, dcdc_cfilt) {11,0}
+Capacitor dcdc_c04(dt, dcdc_cfilt) {0,27}
+
+% DC bus cables
+
+Inductor cable_l01(DT, CABLE_L) {3,4}
+Inductor cable_l02(DT, CABLE_L) {5,6}
+Inductor cable_l03(DT, CABLE_L) {7,8}
+Inductor cable_l04(DT, CABLE_L) {9,10}
+Inductor cable_l05(DT, CABLE_L) {19,20}
+Inductor cable_l06(DT, CABLE_L) {21,22}
+Inductor cable_l07(DT, CABLE_L) {23,24}
+Inductor cable_l08(DT, CABLE_L) {25,26}
+Inductor cable_l09(DT, CABLE_L) {3,12}
+Inductor cable_l10(DT, CABLE_L) {13,14}
+Inductor cable_l11(DT, CABLE_L) {15,16}
+Inductor cable_l12(DT, CABLE_L) {17,18}
+Inductor cable_l13(DT, CABLE_L) {19,28}
+Inductor cable_l14(DT, CABLE_L) {29,30}
+Inductor cable_l15(DT, CABLE_L) {31,32}
+Inductor cable_l16(DT, CABLE_L) {33,34}
+
+Resistor cable_r01(CABLE_R) {4,5}
+Resistor cable_r02(CABLE_R) {6,7}
+Resistor cable_r03(CABLE_R) {8,9}
+Resistor cable_r04(CABLE_R) {10,11}
+Resistor cable_r05(CABLE_R) {20,21}
+Resistor cable_r06(CABLE_R) {22,23}
+Resistor cable_r07(CABLE_R) {24,25}
+Resistor cable_r08(CABLE_R) {26,27}
+Resistor cable_r09(CABLE_R) {12,13}
+Resistor cable_r010(CABLE_R) {14,15}
+Resistor cable_r011(CABLE_R) {16,17}
+Resistor cable_r012(CABLE_R) {18,11}
+Resistor cable_r013(CABLE_R) {28,29}
+Resistor cable_r014(CABLE_R) {30,31}
+Resistor cable_r015(CABLE_R) {32,33}
+Resistor cable_r016(CABLE_R) {34,27}
+
+% DC/AC converters and output filtering
+
+BridgeConverter3LegIdealSwitches inv1(DT, INV_CIN, INV_LFILT, INV_RFILT) {5,21,37,38,39}
+BridgeConverter3LegIdealSwitches inv2(DT, INV_CIN, INV_LFILT, INV_RFILT) {7,23,40,41,42}
+BridgeConverter3LegIdealSwitches inv3(DT, INV_CIN, INV_LFILT, INV_RFILT) {9,25,43,44,45}
+BridgeConverter3LegIdealSwitches inv4(DT, INV_CIN, INV_LFILT, INV_RFILT) {13,29,46,47,48}
+BridgeConverter3LegIdealSwitches inv5(DT, INV_CIN, INV_LFILT, INV_RFILT) {15,31,49,50,51}
+BridgeConverter3LegIdealSwitches inv6(DT, INV_CIN, INV_LFILT, INV_RFILT) {17,33,52,53,54}
+
+Capacitor inv_c01(DT, INV_CFILT) {37,0}
+Capacitor inv_c02(DT, INV_CFILT) {38,0}
+Capacitor inv_c03(DT, INV_CFILT) {39,0}
+Capacitor inv_c04(DT, INV_CFILT) {40,0}
+Capacitor inv_c05(DT, INV_CFILT) {41,0}
+Capacitor inv_c06(DT, INV_CFILT) {42,0}
+Capacitor inv_c07(DT, INV_CFILT) {43,0}
+Capacitor inv_c08(DT, INV_CFILT) {44,0}
+Capacitor inv_c09(DT, INV_CFILT) {45,0}
+Capacitor inv_c10(DT, INV_CFILT) {46,0}
+Capacitor inv_c11(DT, INV_CFILT) {47,0}
+Capacitor inv_c12(DT, INV_CFILT) {48,0}
+Capacitor inv_c13(DT, INV_CFILT) {49,0}
+Capacitor inv_c14(DT, INV_CFILT) {50,0}
+Capacitor inv_c15(DT, INV_CFILT) {51,0}
+Capacitor inv_c16(DT, INV_CFILT) {52,0}
+Capacitor inv_c17(DT, INV_CFILT) {53,0}
+Capacitor inv_c18(DT, INV_CFILT) {54,0}
+
+% AC resistive loads for DC/AC converters
+
+Resistor rload01(LOAD_R) {37,0}
+Resistor rload02(LOAD_R) {38,0}
+Resistor rload03(LOAD_R) {39,0}
+Resistor rload04(LOAD_R) {40,0}
+Resistor rload05(LOAD_R) {41,0}
+Resistor rload06(LOAD_R) {42,0}
+Resistor rload07(LOAD_R) {43,0}
+Resistor rload08(LOAD_R) {44,0}
+Resistor rload09(LOAD_R) {45,0}
+Resistor rload10(LOAD_R) {46,0}
+Resistor rload11(LOAD_R) {47,0}
+Resistor rload12(LOAD_R) {48,0}
+Resistor rload13(LOAD_R) {49,0}
+Resistor rload14(LOAD_R) {50,0}
+Resistor rload15(LOAD_R) {51,0}
+Resistor rload16(LOAD_R) {52,0}
+Resistor rload17(LOAD_R) {53,0}
+Resistor rload18(LOAD_R) {54,0}
