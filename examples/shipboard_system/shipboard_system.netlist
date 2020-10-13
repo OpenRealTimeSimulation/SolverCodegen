@@ -33,17 +33,17 @@ VoltageSource dc_src2(DC_VG, DC_RG) {0,2}
 
 % DC/DC bus converters and their output filtering
 
-BridgeConverter3LegIdealSwitches dcdc1(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {1,2,3,19,55}
+BridgeConverter3LegIdealSwitches dcdc1(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {1,0,2,3,19,55}
 Resistor dcdc1_highz(DCDC_HIGHZ) {55,0}
 
 Capacitor dcdc_c01(DT, DCDC_CFILT) {3,0}
 Capacitor dcdc_c02(DT, DCDC_CFILT) {0,19}
 
-BridgeConverter3LegIdealSwitches dcdc2(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {35,36,11,27,56}
+BridgeConverter3LegIdealSwitches dcdc2(DT, DCDC_CIN, DCDC_LFILT, DCDC_RFILT) {35,0,36,11,27,56}
 Resistor dcdc2_highz(DCDC_HIGHZ) {56,0}
 
-Capacitor dcdc_c03(dt, dcdc_cfilt) {11,0}
-Capacitor dcdc_c04(dt, dcdc_cfilt) {0,27}
+Capacitor dcdc_c03(DT, DCDC_CFILT) {11,0}
+Capacitor dcdc_c04(DT, DCDC_CFILT) {0,27}
 
 % DC bus cables
 
@@ -83,12 +83,12 @@ Resistor cable_r016(CABLE_R) {34,27}
 
 % DC/AC converters and output filtering
 
-BridgeConverter3LegIdealSwitches inv1(DT, INV_CIN, INV_LFILT, INV_RFILT) {5,21,37,38,39}
-BridgeConverter3LegIdealSwitches inv2(DT, INV_CIN, INV_LFILT, INV_RFILT) {7,23,40,41,42}
-BridgeConverter3LegIdealSwitches inv3(DT, INV_CIN, INV_LFILT, INV_RFILT) {9,25,43,44,45}
-BridgeConverter3LegIdealSwitches inv4(DT, INV_CIN, INV_LFILT, INV_RFILT) {13,29,46,47,48}
-BridgeConverter3LegIdealSwitches inv5(DT, INV_CIN, INV_LFILT, INV_RFILT) {15,31,49,50,51}
-BridgeConverter3LegIdealSwitches inv6(DT, INV_CIN, INV_LFILT, INV_RFILT) {17,33,52,53,54}
+BridgeConverter3LegIdealSwitches inv1(DT, INV_CIN, INV_LFILT, INV_RFILT) {5,0,21,37,38,39}
+BridgeConverter3LegIdealSwitches inv2(DT, INV_CIN, INV_LFILT, INV_RFILT) {7,0,23,40,41,42}
+BridgeConverter3LegIdealSwitches inv3(DT, INV_CIN, INV_LFILT, INV_RFILT) {9,0,25,43,44,45}
+BridgeConverter3LegIdealSwitches inv4(DT, INV_CIN, INV_LFILT, INV_RFILT) {13,0,29,46,47,48}
+BridgeConverter3LegIdealSwitches inv5(DT, INV_CIN, INV_LFILT, INV_RFILT) {15,0,31,49,50,51}
+BridgeConverter3LegIdealSwitches inv6(DT, INV_CIN, INV_LFILT, INV_RFILT) {17,0,33,52,53,54}
 
 Capacitor inv_c01(DT, INV_CFILT) {37,0}
 Capacitor inv_c02(DT, INV_CFILT) {38,0}
