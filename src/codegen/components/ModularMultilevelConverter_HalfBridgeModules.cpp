@@ -23,7 +23,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #include "codegen/components/ModularMultilevelConverter_HalfBridgeModules.hpp"
 #include "codegen/SystemConductanceGenerator.hpp"
 #include "codegen/SystemSourceVectorGenerator.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 #include "codegen/Object.hpp"
 #include "codegen/ArrayObject.hpp"
 #include "codegen/StringProcessor.hpp"
@@ -258,9 +258,9 @@ std::string ModularMultilevelConverter_HalfBridgeModules::generateFields()
     generateTypedArrayField<double>(sstrm, "real", "mula", 2*NUM_ARM_SUBMOD);
     generateTypedArrayField<double>(sstrm, "real", "mulb", 2*NUM_ARM_SUBMOD);
     generateTypedArrayField<double>(sstrm, "real", "mulc", 2*NUM_ARM_SUBMOD);
-	generateTypedArrayField<double>(sstrm, "real", "Vca", 2*NUM_ARM_SUBMOD);
-	generateTypedArrayField<double>(sstrm, "real", "Vcb", 2*NUM_ARM_SUBMOD);
-	generateTypedArrayField<double>(sstrm, "real", "Vcc", 2*NUM_ARM_SUBMOD);
+	generateTypedArrayField<double>(sstrm, "real", "Vca", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
+	generateTypedArrayField<double>(sstrm, "real", "Vcb", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
+	generateTypedArrayField<double>(sstrm, "real", "Vcc", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
 
 	generateTypedTemporary<double>(sstrm, "real", "upa", 0.0);
 	generateTypedTemporary<double>(sstrm, "real", "upb", 0.0);
@@ -611,19 +611,6 @@ std::string ModularMultilevelConverter_HalfBridgeModules::generateUpdateBody()
 
 		//specialize constant parameters
 
-//	str_proc.replaceWordAll("MMC_LEVELS", appendName("MMC_LEVELS"));
-//	str_proc.replaceWordAll("DT", appendName("DT"));
-//	str_proc.replaceWordAll("RB", appendName("RB"));
-//	str_proc.replaceWordAll("RARM", appendName("RARM"));
-//	str_proc.replaceWordAll("LARM", appendName("LARM"));
-//	str_proc.replaceWordAll("SUBMOD_CAP", appendName("SUBMOD_CAP"));
-//	str_proc.replaceWordAll("DTOC", appendName("DTOC"));
-//	str_proc.replaceWordAll("DTOL", appendName("DTOL"));
-//	str_proc.replaceWordAll("LODT", appendName("LODT"));
-//	str_proc.replaceWordAll("INVRFC", appendName("INVRFC"));
-//	str_proc.replaceWordAll("NUM_ARM_SUBMOD", appendName("NUM_ARM_SUBMOD"));
-//	str_proc.replaceWordAll("CAP_SUBMOD_INIT", appendName("CAP_SUBMOD_INIT"));
-
 	appendNameToWords
 	(
 		body,
@@ -701,35 +688,6 @@ std::string ModularMultilevelConverter_HalfBridgeModules::generateUpdateBody()
 	);
 
 		//specialize solution inputs and outputs
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<P<<"]";
-//	str_proc.replaceWordAll("epos", sstrm.str());
-//
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<G<<"]";
-//	str_proc.replaceWordAll("eneu", sstrm.str());
-//
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<N<<"]";
-//	str_proc.replaceWordAll("eneg", sstrm.str());
-//
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<A<<"]";
-//	str_proc.replaceWordAll("eout1", sstrm.str());
-//
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<B<<"]";
-//	str_proc.replaceWordAll("eout2", sstrm.str());
-//
-//	sstrm.str("");
-//	sstrm.clear();
-//	sstrm << "x["<<C<<"]";
-//	str_proc.replaceWordAll("eout3", sstrm.str());
 
 	str_proc.replaceWordAll("P", std::to_string(P));
 	str_proc.replaceWordAll("N", std::to_string(N));

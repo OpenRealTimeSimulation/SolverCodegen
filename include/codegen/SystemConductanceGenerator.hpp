@@ -21,12 +21,9 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 */
 
 /**
- *
- *
- * @author Matthew Milton
- * @date Summer 2017
- *
- */
+	\author Matthew Milton
+	\date Summer 2017 - Fall 2020
+**/
 #ifndef SYSTEMCONDUCTANCEGENERATOR_HPP
 #define SYSTEMCONDUCTANCEGENERATOR_HPP
 
@@ -39,21 +36,21 @@ namespace lblmc
 {
 
 /**
- * @brief Generates the square conductance matrix for a system model simulated in LB-LMC
- *
- * This class is intended for use of computing the conductance matrix of a system in
- * offline simulation only.  The conductance matrix that is managed by this class
- * can be used in math tools to develop the resistance matrix that is to be used
- * in LB-LMC FPGA simulation.
- *
- * This class is used to compute conductance matrix by passing its matrix to LB-LMC
- * components to stamp in their conductances.  After the conductance matrix is stamped,
- * the matrix can be exported by this class's instances to file or memory to be processed for
- * development of a LB-LMC simulation engine that is RTL synthesizable.
- *
- * @note This class is NOT intended for RTL Synthesis.
- *
- */
+	\brief Generates the square conductance matrix for a system model simulated in LB-LMC
+
+	This class is intended for use of computing the conductance matrix of a system in
+	offline simulation only.  The conductance matrix that is managed by this class
+	can be used in math tools to develop the resistance matrix that is to be used
+	in LB-LMC FPGA simulation.
+
+	This class is used to compute conductance matrix by passing its matrix to LB-LMC
+	components to stamp in their conductances.  After the conductance matrix is stamped,
+	the matrix can be exported by this class's instances to file or memory to be processed for
+	development of a LB-LMC simulation engine that is RTL synthesizable.
+
+	\note This class is NOT intended for RTL Synthesis.
+
+ **/
 class SystemConductanceGenerator
 {
 private:
@@ -66,7 +63,7 @@ public:
 
 	/**
 	 * parameter constructor
-	 * @param dimension non-zero dimension of square conductance matrix (length or width)
+	 * \param dimension non-zero dimension of square conductance matrix (length or width)
 	 */
 	SystemConductanceGenerator(unsigned int dimension);
 
@@ -76,14 +73,14 @@ public:
 	 * Initializes conductance matrix to that given.  This constructor expects the dimension to match up
 	 * to get given matrix
 	 *
-	 * @param dimension non-zero dimension of square conductance matrix (length or width)
-	 * @param base matrix to initialize conductance matrix to
+	 * \param dimension non-zero dimension of square conductance matrix (length or width)
+	 * \param base matrix to initialize conductance matrix to
 	 */
 	SystemConductanceGenerator(unsigned int dimension, const MatrixRMXd& base);
 
 	/**
 	 * copy constructor
-	 * @param base conductance matrix to copy from
+	 * \param base conductance matrix to copy from
 	 */
 	SystemConductanceGenerator(const SystemConductanceGenerator& base);
 
@@ -92,8 +89,8 @@ public:
 	 *
 	 * If base's pointer is equal to zero, this method clears the matrix to all ZERO values.
 	 *
-	 * @param dimension non-zero dimension of square conductance matrix (length or width)
-	 * @param base conductance matrix to copy from
+	 * \param dimension non-zero dimension of square conductance matrix (length or width)
+	 * \param base conductance matrix to copy from
 	 */
 	void reset(unsigned int dimension);
 
@@ -102,20 +99,20 @@ public:
 	 *
 	 * If base's pointer is equal to zero, this method clears the matrix to all ZERO values.
 	 *
-	 * @param dimension non-zero dimension of square conductance matrix (length or width)
-	 * @param base conductance matrix to copy from
+	 * \param dimension non-zero dimension of square conductance matrix (length or width)
+	 * \param base conductance matrix to copy from
 	 */
 	void reset(unsigned int dimension, const MatrixRMXd& base);
 
 	/**
 	 * resets conductance matrix to that of given SystemConductance
-	 * @param base
+	 * \param base
 	 */
 	void reset(const SystemConductanceGenerator& base);
 
 	/**
 	 * returns conductance matrix as an observer pointer
-	 * @return pointer to conductance matrix data
+	 * \return pointer to conductance matrix data
 	 */
 	double* asPointer();
 
@@ -124,15 +121,15 @@ public:
 	 *
 	 * same as asPointer()
 	 *
-	 * @see asPointer()
+	 * \see asPointer()
 	 *
-	 * @return return conductance matrix as an array
+	 * \return return conductance matrix as an array
 	 */
 	double* asArray();
 
 	/**
 	 * returns the conductance matrix as a Eigen3 Matrix Type
-	 * @return
+	 * \return
 	 */
 	MatrixRMXd& asEigen3Matrix();
 
@@ -140,7 +137,7 @@ public:
 
 	/**
 	 * gets dimension of square conductance matrix
-	 * @return dimension of matrix
+	 * \return dimension of matrix
 	 */
 	unsigned int getDimension() const;
 

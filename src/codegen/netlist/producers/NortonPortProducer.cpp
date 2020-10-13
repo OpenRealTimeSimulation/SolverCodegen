@@ -69,15 +69,6 @@ std::unique_ptr<Component> NortonPortProducer::operator()(const ComponentListing
 		throw std::invalid_argument(producer_name+std::string("::operator() -- netlist component terminal connection amount is incorrect: amount must be 2 + 2 * number of transconductances") );
 	}
 
-	//const std::vector<double>& parameters = component_def.getParameters();
-	//auto parameters_iter = parameters.begin();
-	//const std::vector<unsigned int>& terminal_connections = component_def.getTerminalConnections();
-	//auto terminal_connections_iter = terminal_connections.begin();
-
-	//auto conductance = *parameters_iter; parameters_iter++;
-	//auto port_term_p = *terminal_connections_iter; terminal_connections_iter++;
-	//auto port_term_n = *terminal_connections_iter; terminal_connections_iter++;
-
 	NortonPort* comp = new NortonPort(component_def.getLabel(), component_def.getParameters());
 	comp->setTerminalConnections(component_def.getTerminalConnections());
 

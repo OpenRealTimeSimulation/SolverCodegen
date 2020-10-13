@@ -27,13 +27,13 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #include <memory>
 #include <string>
 #include "codegen/components/Component.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 
 namespace lblmc
 {
 
 class Component;
-class SimulationEngineGenerator;
+class SolverEngineGenerator;
 
 /**
 	\brief Defines a System composed of Component Objects which from a C++ LB-LMC

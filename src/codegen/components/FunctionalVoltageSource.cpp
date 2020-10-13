@@ -134,9 +134,6 @@ std::string FunctionalVoltageSource::generateInputs()
 	sstrm <<
 	v_in.generateArgument();
 
-	//sstrm << "\n";
-
-
 	return sstrm.str();
 }
 

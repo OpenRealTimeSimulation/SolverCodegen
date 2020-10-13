@@ -209,7 +209,6 @@ void SystemSourceVectorGenerator::asCFunction(std::string& buffer, const char* f
 	std::stringstream sstrm;
 
 	sstrm <<
-	//"void " << func_name << "(real* b, real* b_components)\n"
 	"void " << func_name << "(real b["<<dimension<<"], real b_components["<<src_index<<"])\n"
 	"{\n\t";
 
@@ -327,7 +326,6 @@ void SystemSourceVectorGenerator::exportAsCFunctionSource(const char* filename, 
 
 	try
 	{
-		//file.open(filename, std::fstream::out | std::fstream::trunc);
 		header.open((hname).c_str(), std::fstream::out | std::fstream::trunc);
 		source.open((sname).c_str(), std::fstream::out | std::fstream::trunc);
 	}

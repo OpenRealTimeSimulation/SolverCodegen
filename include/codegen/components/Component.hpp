@@ -36,7 +36,7 @@ namespace lblmc
 
 class SystemConductanceGenerator;
 class SystemSourceVectorGenerator;
-class SimulationEngineGenerator;
+class SolverEngineGenerator;
 class StringProcessor;
 
 /**
@@ -60,9 +60,6 @@ protected:
 	std::string comp_name;
 
 public:
-
-	//struct ResistiveCompanionElement;
-	//typedef ResistiveCompanionElement RCE; ///< typedef alias for Component::ResistiveCompanionElement type
 
 		//string constants for common integration methods used by components
 	const static std::string INTEGRATION_NONE; //no integration method used
@@ -136,12 +133,16 @@ public:
 	/**
 		\brief gets basic resistive companion model elements (source+id+conductance) in generated component
 		\param vector that will store the elements
+
+		\deprecated This method will be removed in future versions of the library
 	**/
 	inline virtual void getResistiveCompanionElements(std::vector<ResistiveCompanionElement>& elements) const { elements.clear(); }
 
 	/**
 		\brief gets controlled source resistive companion model elements in generated component
 		\param vector that will store the elements
+
+		\deprecated This method will be removed in future versions of the library
 	**/
 	inline virtual void getResistiveCompanionControlledSourceElements
 		(std::vector<ResistiveCompanionControlledSourceElement>& elements) const { elements.clear(); }
@@ -220,7 +221,7 @@ public:
 		\param gen the simulation solver engine generator that creates solver code for the system generated component resides
 		\param outputs vector of supported outputs that generated component will have; default is ALL outputs supported
 	**/
-	virtual void stampSystem(SimulationEngineGenerator& gen, std::vector<std::string> outputs = {"ALL"});
+	virtual void stampSystem(SolverEngineGenerator& gen, const std::vector<std::string>& outputs = {"ALL"});
 
 	/**
 		\brief generates constant static parameters body code for generated component
@@ -371,17 +372,17 @@ protected:
 	}
 
 	template<typename T>
-	inline void generateTypedArrayField(std::stringstream& sstrm, std::string type, std::string var, long size)
+	inline void generateTypedArrayField(std::stringstream& sstrm, std::string type, std::string var, long size, T value = 0)
 	{
 		if(size < 1)
 		{
 			throw std::invalid_argument("Component::generateTypedArrayField() -- size cannot be less than 1");
 		}
 
-		sstrm << "static "<<type<<" "<<appendName(var)<<"["<<size<<"]"<<" = { "<<T(0);
+		sstrm << "static "<<type<<" "<<appendName(var)<<"["<<size<<"]"<<" = { "<<value;
 		for(long i = 1; i<size; i++)
 		{
-			sstrm << ","<<T(0);
+			sstrm << ","<<value;
 		}
 		sstrm << " };\n";
 	}

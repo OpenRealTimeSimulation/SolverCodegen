@@ -33,6 +33,8 @@ namespace lblmc
 	\brief defines standard C++11/14 features for code generation and validates C++ code
 
 	This class provides public string constants for C++ standard keywords and characters/operators
+
+	\note This file is not part of standard C++.
 **/
 class Cpp
 {

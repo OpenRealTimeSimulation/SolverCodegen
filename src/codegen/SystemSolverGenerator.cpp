@@ -166,7 +166,6 @@ std::string SystemSolverGenerator::generateCFunction(std::string solver_name, st
 	return sstrm.str();
 }
 
-//void SystemSolverGenerator::generateCFunctionAndExport(const char* filename, const char* solver_name,const char* A_name, const char* b_func_name)
 void SystemSolverGenerator::generateCFunctionAndExport(std::string filename, std::string solver_name, std::string A_name, std::string b_func_name) const
 {
 	if(A == nullptr || dimension == 0)
@@ -210,9 +209,6 @@ void SystemSolverGenerator::generateCFunctionAndExport(std::string filename, std
 
 	source << "#include \"" << filename << ".hpp" << "\"\n\n";
 
-//	std::string buf;
-//	generateCFunction(buf,solver_name,A_name,b_func_name);
-//	source << buf;
 	source << generateCFunction(solver_name,A_name,b_func_name);
 	source.close();
 }

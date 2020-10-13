@@ -22,12 +22,11 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 
 
 /**
- *
- *
- * @author Matthew Milton
- * @date Spring 2018
- *
- */
+
+	\author Matthew Milton
+	\date Spring 2018 - Fall 2020
+
+ **/
 #ifndef SYSTEMSOLVERGENERATOR_HPP
 #define SYSTEMSOLVERGENERATOR_HPP
 
@@ -51,10 +50,10 @@ public:
 
 	/**
 	 * parameter constructor
-	 * @param A the inverted conductance matrix ( A = G^-1 of Gx=b )
-	 * @param dimension number of solutions in the system Gx=b
-	 * @param num_components number of components in system to contribute to vector b of Gx=b
-	 * @param zero_bound range from zero when determining whether Aij*bi=xi is close to zero to be ignored; defaults to 1e-12.
+	 * \param A the inverted conductance matrix ( A = G^-1 of Gx=b )
+	 * \param dimension number of solutions in the system Gx=b
+	 * \param num_components number of components in system to contribute to vector b of Gx=b
+	 * \param zero_bound range from zero when determining whether Aij*bi=xi is close to zero to be ignored; defaults to 1e-12.
 	 */
 	SystemSolverGenerator(const double* A, unsigned int dimension, unsigned int num_components, double zero_bound = 1.0e-12);
 	SystemSolverGenerator(const SystemSolverGenerator& base);
@@ -122,8 +121,6 @@ public:
 	**/
 	void generateCFunctionAndExport(std::string filename, std::string solver_name = "solve",
 			std::string A_name = "inv_g", std::string b_func_name = "agg_b") const;
-//	void generateCFunctionAndExport(const char* filename, const char* solver_name = "solve",
-//			const char* A_name = "inv_g", const char* b_func_name = "agg_b");
 };
 
 } //namespace lblmc

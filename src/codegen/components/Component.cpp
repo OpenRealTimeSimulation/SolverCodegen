@@ -24,7 +24,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #include "codegen/components/Component.hpp"
 #include "codegen/SystemConductanceGenerator.hpp"
 #include "codegen/SystemSolverGenerator.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 #include "codegen/StringProcessor.hpp"
 
 #include <sstream>
@@ -39,7 +39,7 @@ const std::string Component::INTEGRATION_TRAPEZOIDAL    = "trapezoidal";
 const std::string Component::INTEGRATION_GEAR           = "gear";
 const std::string Component::INTEGRATION_RUNGE_KUTTA_4  = "runge_kutta_4";
 
-void Component::stampSystem(SimulationEngineGenerator& gen, std::vector<std::string> outputs)
+void Component::stampSystem(SolverEngineGenerator& gen, const std::vector<std::string>& outputs)
 {
 	std::string buf;
 	SystemConductanceGenerator& scg = gen.getConductanceGenerator();

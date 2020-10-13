@@ -23,7 +23,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #include "codegen/components/SeriesRLIdealSwitch.hpp"
 #include "codegen/SystemConductanceGenerator.hpp"
 #include "codegen/SystemSourceVectorGenerator.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 #include "codegen/Object.hpp"
 #include "codegen/ArrayObject.hpp"
 #include "codegen/StringProcessor.hpp"
@@ -167,8 +167,6 @@ std::string SeriesRLIdealSwitch::generateInputs()
 
 	sstrm <<
 	sw.generateArgument();
-
-	//sstrm << "\n";
 
 	return sstrm.str();
 }

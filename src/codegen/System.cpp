@@ -22,7 +22,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 
 #include "codegen/System.hpp"
 #include "codegen/components/Component.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 
 #include <algorithm>
 #include <stdexcept>

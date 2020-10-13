@@ -29,6 +29,7 @@ namespace lblmc
 /**
 	\brief Describes a basic resistive companion element for a Component
 	(current source with parallel conductance (or ideal voltage source) and associated id and name)
+
 	\deprecated This class is being phased out in use
 **/
 class ResistiveCompanionElement

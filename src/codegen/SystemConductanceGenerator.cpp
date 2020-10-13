@@ -88,10 +88,6 @@ double* SystemConductanceGenerator::asArray()
 {
 	return matrix.data();
 }
-//std::vector<NumType>& SystemConductanceGenerator::asVector()
-//{
-//	return matrix;
-//}
 
 MatrixRMXd& SystemConductanceGenerator::asEigen3Matrix()
 {
@@ -141,25 +137,21 @@ void SystemConductanceGenerator::stampTransconductance(double transconductance, 
 
 	if( (m != 0) && (p != 0) )
 	{
-		//matrix(m-1,p-1) += transconductance;
 		matrix(p-1,m-1) += transconductance;
 	}
 
 	if( (m != 0) && (q != 0) )
 	{
-		//matrix(m-1,q-1) -= transconductance;
 		matrix(q-1,m-1) -= transconductance;
 	}
 
 	if( (n != 0) && (p != 0) )
 	{
-		//matrix(n-1,p-1) -= transconductance;
 		matrix(p-1,n-1) -= transconductance;
 	}
 
 	if( (n != 0) && (q != 0) )
 	{
-		//matrix(n-1,q-1) += transconductance;
 		matrix(q-1,n-1) += transconductance;
 	}
 

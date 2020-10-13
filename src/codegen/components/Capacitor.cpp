@@ -105,8 +105,6 @@ void Capacitor::setTerminalConnections(unsigned int p, unsigned int n)
 
 void Capacitor::stampConductance(SystemConductanceGenerator& gen)
 {
-	//const double HOC2 = 2.0*CAP/DT;
-
 	gen.stampConductance(HOC2, P, N);
 }
 
@@ -160,20 +158,10 @@ std::string Capacitor::generateUpdateBody()
 	std::fixed <<
 	std::scientific;
 
-	//epos_past = epos;
-	//eneg_past = eneg;
-	//current_eq_past = current_eq;
-
 	sstrm <<
 	"epos_past"      <<"_"<<comp_name<<" = "<<"x["<<P<<"]"<<";\n" <<
 	"eneg_past"      <<"_"<<comp_name<<" = "<<"x["<<N<<"]"<<";\n" <<
 	"current_eq_past"<<"_"<<comp_name<<" = "<<"current_eq"<<"_"<<comp_name<<";\n" ;
-
-
-	//delta_v = AddSubType(epos_past) - AddSubType(eneg_past);
-	//current = (hoc2)*(delta_v) - (current_eq_past);
-	//current_eq = (current) + (hoc2)*(delta_v);
-	//*bout = current_eq;
 
 	sstrm <<
 	"delta_v"<<"_"<<comp_name<<" = "<<"epos_past"<<"_"<<comp_name<<" - "<<"eneg_past"<<"_"<<comp_name<<";\n" <<

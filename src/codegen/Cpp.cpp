@@ -281,7 +281,7 @@ const std::vector<std::string> Cpp::ALL_CPP14_KEYWORDS
 
 bool Cpp::isNameValid(const std::string& name)
 {
-	bool valid = true;
+	bool valid = false;
 
 	valid =
 	(name.size() != 0) &&
@@ -292,27 +292,6 @@ bool Cpp::isNameValid(const std::string& name)
 
 	return valid;
 }
-
-//bool Cpp::isObjectDeclarationValid(const std::string& decl)
-//{
-//	throw std::runtime_error("Cpp::isObjectDeclarationValid(*) -- method not supported yet");
-//
-//	return false;
-//}
-//
-//bool Cpp::isObjectDefinitionValid(const std::string& def)
-//{
-//	throw std::runtime_error("Cpp::isObjectDefinitionValid(*) -- method not supported yet");
-//
-//	return false;
-//}
-//
-//bool Cpp::isParameterValid(const std::string& param)
-//{
-//	throw std::runtime_error("Cpp::isParameterValid(*) -- method not supported yet");
-//
-//	return false;
-//}
 
 bool Cpp::isCpp14Keyword(const std::string& word)
 {

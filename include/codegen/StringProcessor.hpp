@@ -540,8 +540,6 @@ public:
 
         while(true)
 		{
-			//std::cout << "hi! ";
-
 			pos = str->find(old_word, pos+1);
 			if(pos < 0) return std::string::npos;
 
@@ -552,7 +550,6 @@ public:
 
             if(!isWordDelimiter(c)) continue;
 
-            //if(pos+old_word.size()+1 < str->size())
             if(pos+old_word.size() < str->size())
 			{
 				c = (*str)[pos+old_word.size()];
@@ -560,16 +557,13 @@ public:
 
 			if(!isWordDelimiter(c))
 			{
-				//std::cout << c << " NOT a word delimiter\n";
 				continue;
 			}
 			else
 			{
-				//std::cout << c << " IS a word delimiter\n";
 				break;
 			}
 		}
-		//std::cout << "bye! ";
 
         std::string before = str->substr(0,pos);
         std::string after  = str->substr(pos+old_word.size());
@@ -578,11 +572,10 @@ public:
         *str += new_word;
         *str += after;
 
-        return pos+new_word.size(); //CHECK IF THIS CORRECT
+        return pos+new_word.size();
 	}
 
 	/**
-		\todo check if new code works correctly! 02.03.2019.2119
 		\brief replaces all instances of a word contained in processed string with a new word
 		\param old_word the word to replace
 		\param new_word the replacement word

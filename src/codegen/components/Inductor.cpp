@@ -193,19 +193,10 @@ std::string Inductor::generateUpdateBody()
 	std::fixed <<
 	std::scientific;
 
-	//epos_past = epos;
-	//eneg_past = eneg;
-	//current_eq_past = current_eq;
-
     sstrm <<
     appendName("epos_past")<<" = "<<"x["<<P<<"]"<<";\n" <<
     appendName("eneg_past")<<" = "<<"x["<<N<<"]"<<";\n" <<
 	appendName("current_eq_past")<<" = "<<appendName("current_eq")<<";\n" ;
-
-	//delta_v = AddSubType(epos_past) - AddSubType(eneg_past);
-	//current = hol2*delta_v - current_eq_past;
-	//current_eq = -current - hol2*delta_v;
-	//*bout = current_eq;
 
 	sstrm <<
 	appendName("delta_v")<<" = "<<appendName("epos_past")<<" - "<<appendName("eneg_past")<<";\n" <<

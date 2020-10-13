@@ -38,8 +38,6 @@ namespace lblmc
 /**
 	\brief Loads a LB-LMC Model Definition from a plain text netlist file or string
 
-	\todo develop this class
-
 	A netlist of a LB-LMC system model defines the components and network connections between these
 	components that make up the model.
 

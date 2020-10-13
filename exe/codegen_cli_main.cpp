@@ -23,7 +23,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 /**
 	@ file main file for CLI application for LB-LMC solver code generator
 	@author Matthew Milton
-	@date 2019
+	@date 2019-2020
 **/
 
 #include <iostream>
@@ -33,7 +33,7 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 #include "codegen/netlist/Netlist.hpp"
 #include "codegen/netlist/NetlistLoader.hpp"
 #include "codegen/netlist/ComponentFactory.hpp"
-#include "codegen/SimulationEngineGenerator.hpp"
+#include "codegen/SolverEngineGenerator.hpp"
 
 #define STRINGFY(x) #x
 #define TOSTRING(x) STRINGFY(x)
@@ -42,7 +42,7 @@ const static std::string PROGRAM_TITLE =
 "ORTiS Solver C++ Code Generator";
 
 const static std::string PROGRAM_VERSION =
-"Version: " TOSTRING(VERSION) //VERSION defined outside of code (-D argument of gcc tools)
+"Built: " __DATE__ " " __TIME__
 ;
 
 const static std::string COPYRIGHT =
@@ -116,10 +116,10 @@ ORTiS Solver C++ Code Generator uses Eigen 3 Linear Algebra C++ Template Library
 Acknowledgements:
 
 Matthew Milton   -- ORTiS Code Generation Library and Tool Creator, Lead Developer and Director
-Andrea Benigni   -- Original LB-LMC Solver Algorithm Creator
 Michele Difronzo -- Component Model Developer, Software Tester, Feature Requester
 Mark Vygoder     -- Component Model Developer, Software Tester, Feature Requester
 Dhiman Chowdhury -- Component Model Developer
+Andrea Benigni   -- Original LB-LMC Solver Algorithm Creator
 
 )";
 
@@ -179,8 +179,8 @@ int main(int argc, char* argv[])
 
 			std::vector< ComponentFactory::ComponentPtr > component_generators;
 
-			SimulationEngineGenerator seg(model_name, num_solutions);
-			SimulationEngineGeneratorParameters seg_params;
+			SolverEngineGenerator seg(model_name, num_solutions);
+			SolverEngineGeneratorParameters seg_params;
 			seg_params.codegen_solver_templated_function_enable = true;
 			seg_params.codegen_solver_templated_real_type_enable = true;
 				seg.setParameters(seg_params);

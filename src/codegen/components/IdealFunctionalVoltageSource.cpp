@@ -114,9 +114,6 @@ std::string IdealFunctionalVoltageSource::generateInputs()
 	sstrm <<
 	i_in.generateArgument();
 
-	//sstrm << "\n";
-
-
 	return sstrm.str();
 }
 

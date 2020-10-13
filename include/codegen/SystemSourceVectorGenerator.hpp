@@ -24,8 +24,8 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 /**
  *
  *
- * @author Matthew Milton
- * @date Spring 2018
+ * \author Matthew Milton
+ * \date Spring 2018
  *
  */
 #ifndef SYSTEMSOURCEVECTORGENERATOR_HPP
@@ -39,7 +39,7 @@ namespace lblmc
 {
 
 /**
- * @brief encapsulates information of the source vector b of a system model in LB-LMC method
+ * \brief encapsulates information of the source vector b of a system model in LB-LMC method
  *
  * This class is intended for use of generating functions that aggregate source contributions
  * and compute source vectors during online simulation.  The functions are generated offline and
@@ -61,7 +61,7 @@ namespace lblmc
  * 	s is the index of last element of the source vector.  If a source vector b element has no
  * 	source contributions, it is assigned zero.
  *
- * @note This class is NOT intended for RTL Synthesis.
+ * \note This class is NOT intended for RTL Synthesis.
  *
  *
  */
@@ -76,32 +76,32 @@ private:
 public:
 	/**
 	 * parameter constructor
-	 * @param dimension size of the source vector; number of solutions in system Gx=b
+	 * \param dimension size of the source vector; number of solutions in system Gx=b
 	 */
 	SystemSourceVectorGenerator(unsigned int dimension);
 
 	/**
 	 * copy constructor
-	 * @param base object to copy from
+	 * \param base object to copy from
 	 */
 	SystemSourceVectorGenerator(const SystemSourceVectorGenerator& base);
 
 	/**
 	 * resets the source vector
-	 * @param dimension size of the source vector; number of solutions in system Gx=b
+	 * \param dimension size of the source vector; number of solutions in system Gx=b
 	 */
 	void reset(unsigned int dimension);
 
 	/**
 	 * resets the source vector to be copy of another source vector
-	 * @param base object to copy from
+	 * \param base object to copy from
 	 */
 	void reset(const SystemSourceVectorGenerator& base);
 
 	/**
 	 * returns the vector of indices of sources contributing to particular vector-element in source vector indexed by argument n
-	 * @param n the nonzero (>0) index of the source vector vector-element whose index vector is returned
-	 * @return the index vector of sources contributing to source vector element n
+	 * \param n the nonzero (>0) index of the source vector vector-element whose index vector is returned
+	 * \return the index vector of sources contributing to source vector element n
 	 */
 	std::vector<long>& asVector(unsigned int n);
 
@@ -109,17 +109,17 @@ public:
 	 * returns an ordered C++ map of the source indices and their node indices
 	 * the key of the map is the system node index while the corresponding vector value is the collection of source indices that contribute to the node.
 	 * map: src_index -> {pos_node_index, neg_node_index}
-	 * @return reference to the ordered map
+	 * \return reference to the ordered map
 	 */
 	std::map<long, std::vector<long> >& asMap();
 
 	/**
-	 * @return the dimension (number of solutions in Gx=b) of the source vector
+	 * \return the dimension (number of solutions in Gx=b) of the source vector
 	 */
 	unsigned int getDimension() const;
 
 	/**
-	 * @return the number of sources inserted in the source vector
+	 * \return the number of sources inserted in the source vector
 	 */
 	unsigned int getNumSources() const;
 
@@ -132,9 +132,9 @@ public:
 
 	/**
 	 * inserts a contributing source's index into the source vector between given nodes
-	 * @param npos positive node of the source
-	 * @param nneg negative node of the source
-	 * @return the index of the inserted source; 0 if source not inserted from having no effect (npos==nneg)
+	 * \param npos positive node of the source
+	 * \param nneg negative node of the source
+	 * \return the index of the inserted source; 0 if source not inserted from having no effect (npos==nneg)
 	 */
 	unsigned int insertSource(unsigned int npos, unsigned int nneg);
 
@@ -149,24 +149,24 @@ public:
 
 
     /**
-        @brief inserts the indices of several contributing sources from components, into the source vector
+        \brief inserts the indices of several contributing sources from components, into the source vector
 
         This method takes the nodes of contributing sources from components and inserts these
         sources' source-indices into the source vector.
 
         This method can stamp one or more components into the source vector if their source node indices are in the given nodes vector
 
-        @param nodes a vector of node-index pairs that indicate how the indices of sources of (a) component(s) are to be stamped into source vector
+        \param nodes a vector of node-index pairs that indicate how the indices of sources of (a) component(s) are to be stamped into source vector
 
         nodes vector must have an even number of node indices as each source has 2 nodes each.
 
-        @return vector of indices for the inserted components, in order as in nodes; empty vector if any source has no effect (npos==nneg)
+        \return vector of indices for the inserted components, in order as in nodes; empty vector if any source has no effect (npos==nneg)
     **/
 	std::vector<unsigned int> insertComponents(std::vector<unsigned int> nodes);
 
 	/**
 	 * creates a table, as a string, of the contributing source indices corresponding to each source vector element
-	 * @param buffer string that will store the table
+	 * \param buffer string that will store the table
 	 * \deprecated This method is to be replaced by std::string asString(void) const
 	 */
 	void asString(std::string& buffer) const;
@@ -180,8 +180,8 @@ public:
 	/**
 	 * Generates a C/C++ function, as a compilable string, that aggregates/computes the source vector b from array of source contributions
 	 * The generated function is created from the indices stored in this object.
-	 * @param buffer string that will store the source code for the function
-	 * @param func_name the name of the generated function
+	 * \param buffer string that will store the source code for the function
+	 * \param func_name the name of the generated function
 	 \deprecated This method is to be replaced by std::string asCFunction(std::string func_name) const
 	 */
 	void asCFunction(std::string& buffer, const char* func_name="aggregateSources") const;
@@ -209,9 +209,9 @@ public:
 	 * Generates the C/C++ source code for a function that aggregates/computes the source vector b from array of given source contributions
 	 * The generated function is created from the indices stored in this object.
 	 * The emitted source code is a HPP/CPP header/source file pair with .hpp and .cpp extensions respectively.
-	 * @param dir existing directory to store source files in, written as "/dir/loc/"; input "" for local directory of calling program; given directory must already exist!
-	 * @param filename filename, including directory, of the source code files, without extension or spaces
-	 * @param func_name the name of the generated function; default is "aggregateSources"
+	 * \param dir existing directory to store source files in, written as "/dir/loc/"; input "" for local directory of calling program; given directory must already exist!
+	 * \param filename filename, including directory, of the source code files, without extension or spaces
+	 * \param func_name the name of the generated function; default is "aggregateSources"
 	 * \deprecated This method might be replaced or removed in future versions of the library
 	 */
 	void exportAsCFunctionSource(const char* filename, const char* func_name="aggregateSources") const;

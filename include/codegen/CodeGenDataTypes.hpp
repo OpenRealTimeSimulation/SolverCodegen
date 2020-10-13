@@ -21,27 +21,20 @@ along with LB-LMC Solver C++ Code Generation Library.  If not, see <https://www.
 */
 
 /**
- *
- *
- * Provides data types to be used only in code generation for LB-LMC engine development
- *
- * Many of the data types here may not be FPGA/HDL synthesizable
- *
- * @author Matthew Milton
- * @date Spring 2018
- *
- */
 
-#ifndef TBDATATYPES_HPP
-#define TBDATATYPES_HPP
+	\file CodeGenDataTypes.hpp
 
-//#include "LBLMC/Params.hpp"
+	Provides data types to be used only in code generation for LB-LMC engine development
 
-#ifdef LBLMC_XILINX_VIVADO_HLS
-#include <ap_int.h>
-#include <ap_fixed.h>
-#include <hls_half.h>
-#endif
+	Many of the data types here may not be FPGA/HDL synthesizable
+
+	\author Matthew Milton
+	\date Spring 2018
+
+ **/
+
+#ifndef LBLMC_CODEGENDATATYPES_HPP
+#define LBLMC_CODEGENDATATYPES_HPP
 
 #include <Eigen/Dense>
 
@@ -64,4 +57,4 @@ VectorRMXd; ///< dynamically-allocated row-major double Eigen3 vector type
 
 } //namespace lblmc
 
-#endif // TBDATATYPES_HPP
+#endif // LBLMC_CODEGENDATATYPES_HPP
