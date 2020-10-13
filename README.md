@@ -1,6 +1,6 @@
 <img src="./ortis_logo_300dpi.png" width="300"/>
 
-# ORTiS Solver C++ Code Generation Tools
+# ORTiS LB-LMC Solver C++ Code Generation Tools for Power Electronic System Real-Time Simulation
 
 Copyright (C) 2019-2020 Matthew Milton and Others
 
@@ -59,7 +59,7 @@ The LB-LMC simulation solver algorithm applied in generated solvers was first pr
 doi: 10.1109/TPEL.2014.2361868
 url: https://ieeexplore.ieee.org/document/6918539
 
-FPGA execution of this algorithm is demonstrated in the following papers: 
+FPGA execution of the LB-LMC solver algorithm is demonstrated in the following papers: 
 
 * M. Milton, A. Benigni, and A. Monti, "Real-Time Multi-FPGA Simulation of Energy Conversion Systems," in IEEE Trans. Energy Conversion, vol. 34, no.4, pp. 2198-2208, Dec. 2019.
 doi:  10.1109/TEC.2019.2938811
