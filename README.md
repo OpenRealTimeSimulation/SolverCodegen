@@ -45,6 +45,10 @@ The code generation tools have been applied in the following recent work:
 doi:  10.1109/JESTPE.2020.3017769
 url: https://ieeexplore.ieee.org/document/9171341
 
+* M. Milton, A. Benigni, and A. Monti, "Real-Time Multi-FPGA Simulation of Energy Conversion Systems," in IEEE Trans. Energy Conversion, vol. 34, no.4, pp. 2198-2208, Dec. 2019.
+doi:  10.1109/TEC.2019.2938811
+url: https://ieeexplore.ieee.org/document/8822485
+
 * M. Vygoder, J. Gudex, R. Cuzner, M. Milton, and A. Benigni, ``Real Time Simulation of Transient Overvoltage and Common-Mode during Line-to-Ground Fault in DC Ungrounded Systems,'' IECON 2019 -- 45th Annual Conference of the IEEE Industrial Electronics Society, Lisbon, Portugal, 2019, pp. 6451-6456.
 doi: 10.1109/IECON.2019.8927034
 url: https://ieeexplore.ieee.org/document/8927034
@@ -60,10 +64,6 @@ doi: 10.1109/TPEL.2014.2361868
 url: https://ieeexplore.ieee.org/document/6918539
 
 FPGA execution of the LB-LMC solver algorithm is demonstrated in the following papers: 
-
-* M. Milton, A. Benigni, and A. Monti, "Real-Time Multi-FPGA Simulation of Energy Conversion Systems," in IEEE Trans. Energy Conversion, vol. 34, no.4, pp. 2198-2208, Dec. 2019.
-doi:  10.1109/TEC.2019.2938811
-url: https://ieeexplore.ieee.org/document/8822485
 
 * M. Difronzo, M. Milton, M. Davidson and A. Benigni, "Hardware-in-the-loop testing of high switching frequency power electronics converters," *2017 IEEE Electric Ship Technologies Symposium (ESTS)*, Arlington, VA, 2017, pp. 299-304.
 doi: 10.1109/ESTS.2017.8069297
