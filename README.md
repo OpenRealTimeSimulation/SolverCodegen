@@ -4,7 +4,7 @@
 
 Copyright (C) 2019-2020 Matthew Milton and Others
 
-C++ code generation tools for creation of CPU or FPGA real-time simulation solvers of nonlinear electrical and power electronic systems.
+Code generation tools for creation of CPU or FPGA real-time simulation C++ solvers of nonlinear electrical and power electronic systems.
 
 These tools are part of the Open Real-Time Simulation (ORTiS) framework.
 
