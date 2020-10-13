@@ -44,6 +44,14 @@ The code generation tools have been applied in the following recent work:
 * M. Vygoder, M. Milton, J. Gudex, R. Cuzner, and A. Benigni, ``A Hardware-in-the-Loop Platform for DC Protection,'' IEEE Journal of Emerging and Selected Topics in Power Electronics, Aug. 2020, Early Access.
 doi:  10.1109/JESTPE.2020.3017769
 url: https://ieeexplore.ieee.org/document/9171341
+
+* M. Vygoder, J. Gudex, R. Cuzner, M. Milton, and A. Benigni, ``Real Time Simulation of Transient Overvoltage and Common-Mode during Line-to-Ground Fault in DC Ungrounded Systems,'' IECON 2019 -- 45th Annual Conference of the IEEE Industrial Electronics Society, Lisbon, Portugal, 2019, pp. 6451-6456.
+doi: 10.1109/IECON.2019.8927034
+url: https://ieeexplore.ieee.org/document/8927034
+
+* M. Milton, M. Vygoder, J. Gudex, R. Cuzner, and A. Benigni, ``Power Electronic System Real-Time Simulation on National Instruments FPGA Platforms,'' 2019 IEEE Electric Ship Technologies Symposium (ESTS), Arlington VA, 2019, pp. 32-38.
+doi:  10.1109/ESTS.2019.8847934
+url: https://ieeexplore.ieee.org/document/8847934
   
 The LB-LMC simulation solver algorithm applied in generated solvers was first proposed in:  
 
