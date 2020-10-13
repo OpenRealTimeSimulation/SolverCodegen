@@ -35,7 +35,7 @@ Solver C++ Code Generation Tools are licensed under the GNU General Public Licen
 
 ## Literature 
   
-The solver code generation tools were first presented in:
+The ORTiS solver code generation tools were first presented in:
 
 * M. Milton and A. Benigni, "Software and Synthesis Development Libraries for Power Electronic System Real-Time Simulation," *2019 IEEE Electric Ship Technologies Symposium (ESTS)*, Arlington VA, 2019, pp. 368-376, Aug. 2019.
 doi: 10.1109/ESTS.2019.8847940
