@@ -51,10 +51,10 @@ SubsystemSolverEngineGenerator::SubsystemSolverEngineGenerator
 	port_source_ids()
 {
 	if(model_name == "")
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::constructor(): model_name cannot be null or empty");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::constructor(): model_name cannot be null or empty");
 
 	if(num_solutions == 0)
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::constructor(): num_solutions must be positive nonzero value");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::constructor(): num_solutions must be positive nonzero value");
 }
 
 SubsystemSolverEngineGenerator::SubsystemSolverEngineGenerator(const SubsystemSolverEngineGenerator& base) :
@@ -67,10 +67,10 @@ SubsystemSolverEngineGenerator::SubsystemSolverEngineGenerator(const SubsystemSo
 void SubsystemSolverEngineGenerator::reset(std::string model_name, unsigned int num_solutions)
 {
 	if(model_name == "")
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::reset(): model_name cannot be null or empty");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::reset(): model_name cannot be null or empty");
 
 	if(num_solutions == 0)
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::reset(): num_solutions must be positive nonzero value");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::reset(): num_solutions must be positive nonzero value");
 
 	this->model_name = model_name;
 	this->num_solutions = num_solutions;
@@ -91,7 +91,7 @@ void SubsystemSolverEngineGenerator::addPort(const Port& port)
 {
 	if(port.id == -1 || port.p == -1 || port.n == -1)
 	{
-		throw std::invalid_argument("SubsystemSimulationEngineGenerator::addPort(port) -- port cannot contain invalid id or indices (-1)");
+		throw std::invalid_argument("SubsystemSolverEngineGenerator::addPort(port) -- port cannot contain invalid id or indices (-1)");
 	}
 
 	bool nonexistent = true;
@@ -117,7 +117,7 @@ void SubsystemSolverEngineGenerator::setPorts(const std::vector<Port>& ports)
 	{
 		if(p.id == -1 || p.p == -1 || p.n == -1)
 		{
-			throw std::invalid_argument("SubsystemSimulationEngineGenerator::addPorts(ports) -- ports cannot contain invalid id or indices (-1)");
+			throw std::invalid_argument("SubsystemSolverEngineGenerator::addPorts(ports) -- ports cannot contain invalid id or indices (-1)");
 		}
 	}
 
@@ -134,14 +134,14 @@ const SubsystemSolverEngineGenerator::Port& SubsystemSolverEngineGenerator::getP
 		}
 	}
 
-	throw std::out_of_range("SubsystemSimulationEngineGenerator::getPort(id) -- port does not exist for given id");
+	throw std::out_of_range("SubsystemSolverEngineGenerator::getPort(id) -- port does not exist for given id");
 }
 
 std::vector<SubsystemSolverEngineGenerator::PortModel> SubsystemSolverEngineGenerator::computePortModels() const
 {
 	if(ports.empty())
 	{
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::computePortModels() -- subsystem has no ports for which to compute models");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::computePortModels() -- subsystem has no ports for which to compute models");
 	}
 
 	unsigned int num_ports = ports.size();
@@ -219,7 +219,8 @@ std::vector<SubsystemSolverEngineGenerator::PortModel> SubsystemSolverEngineGene
 			}
 			else
 			{
-                mdl.transconductances[i] = xprobe(dimension+i);
+                //mdl.transconductances[i] = xprobe(dimension+i); //changed 2021-01-15-17.52
+                mdl.transconductances[i+1] = xprobe(dimension+i);
 			}
 
 		}
@@ -299,7 +300,7 @@ void SubsystemSolverEngineGenerator::stampOthersPortModel(const PortModel& port_
 		}
 	}
 
-	throw std::invalid_argument("SubsystemSimulationEngineGenerator::stampOthersPortModel(port_model) -- given port model does not correspond to any port of this subsystem");
+	throw std::invalid_argument("SubsystemSolverEngineGenerator::stampOthersPortModel(port_model) -- given port model does not correspond to any port of this subsystem");
 }
 
 void SubsystemSolverEngineGenerator::stampOthersPortModels(const std::vector<PortModel>& port_models)
@@ -313,7 +314,7 @@ void SubsystemSolverEngineGenerator::stampOthersPortModels(const std::vector<Por
 	}
 	catch(...)
 	{
-		throw std::invalid_argument("SubsystemSimulationEngineGenerator::stampOthersPortModels(port_models) -- one or more of the given port models does not correspond to any port of this subsystem");
+		throw std::invalid_argument("SubsystemSolverEngineGenerator::stampOthersPortModels(port_models) -- one or more of the given port models does not correspond to any port of this subsystem");
 	}
 }
 
@@ -329,7 +330,7 @@ void SubsystemSolverEngineGenerator::addOwnSourceGains(const PortModel& port_mod
 		}
 	}
 
-	throw std::invalid_argument("SubsystemSimulationEngineGenerator::addOwnSourceGains(port_model) -- given port model does not correspond to any port of this subsystem");
+	throw std::invalid_argument("SubsystemSolverEngineGenerator::addOwnSourceGains(port_model) -- given port model does not correspond to any port of this subsystem");
 }
 
 void SubsystemSolverEngineGenerator::addOwnSourceGains(const std::vector<PortModel>& port_models)
@@ -376,7 +377,7 @@ std::string SubsystemSolverEngineGenerator::generatePortSourceEquation(unsigned 
 	catch(const std::out_of_range& error)
 	{
 		throw std::out_of_range
-		("SubsystemSimulationEngineGenerator::generatePortSourceEquation(port_id) -- given port_id does not correspond to any port of the subsystem");
+		("SubsystemSolverEngineGenerator::generatePortSourceEquation(port_id) -- given port_id does not correspond to any port of the subsystem");
 	}
 
 
@@ -684,7 +685,7 @@ std::string SubsystemSolverEngineGenerator::generateCFunction(double zero_bound)
 void SubsystemSolverEngineGenerator::generateCFunctionAndExport(std::string filename, double zero_bound) const
 {
 	if(filename == "")
-		throw std::invalid_argument("SubsystemSimulationEngineGenerator::generateCFunctionAndExport(): filename cannot be null or empty");
+		throw std::invalid_argument("SubsystemSolverEngineGenerator::generateCFunctionAndExport(): filename cannot be null or empty");
 
 	std::fstream file;
 
@@ -696,7 +697,7 @@ void SubsystemSolverEngineGenerator::generateCFunctionAndExport(std::string file
 	}
 	catch(...)
 	{
-		throw std::runtime_error("SubsystemSimulationEngineGenerator::generateCFunctionAndExport(): failed to open or create source files");
+		throw std::runtime_error("SubsystemSolverEngineGenerator::generateCFunctionAndExport(): failed to open or create source files");
 	}
 
 	file <<
@@ -704,7 +705,7 @@ void SubsystemSolverEngineGenerator::generateCFunctionAndExport(std::string file
 			" *\n"
 			" * LBLMC Vivado HLS Simulation Engine for FPGA Designs\n"
 			" *\n"
-			" * Auto-generated by SubsystemSimulationEngineGenerator Object\n"
+			" * Auto-generated by SubsystemSolverEngineGenerator Object\n"
 			" *\n"
 			" */\n\n";
 

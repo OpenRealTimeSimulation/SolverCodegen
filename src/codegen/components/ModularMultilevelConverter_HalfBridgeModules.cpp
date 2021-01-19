@@ -258,9 +258,55 @@ std::string ModularMultilevelConverter_HalfBridgeModules::generateFields()
     generateTypedArrayField<double>(sstrm, "real", "mula", 2*NUM_ARM_SUBMOD);
     generateTypedArrayField<double>(sstrm, "real", "mulb", 2*NUM_ARM_SUBMOD);
     generateTypedArrayField<double>(sstrm, "real", "mulc", 2*NUM_ARM_SUBMOD);
+
+#if 0
 	generateTypedArrayField<double>(sstrm, "real", "Vca", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
 	generateTypedArrayField<double>(sstrm, "real", "Vcb", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
 	generateTypedArrayField<double>(sstrm, "real", "Vcc", 2*NUM_ARM_SUBMOD, CAP_SUBMOD_INIT);
+#endif
+
+	auto generateVcxArrayField = [&](const std::string& name)
+	{
+		if(NUM_ARM_SUBMOD < 1)
+		{
+			throw std::invalid_argument
+			(
+				"ModularMultilevelConverter_HalfBridgeModules::generateFields()::generateVcxArrayField() -- NUM_ARM_SUBMOD cannot be less than 1"
+			);
+		}
+
+		sstrm
+		<< "static real "
+		<< appendName(name)
+		<< "["
+		<< 2*NUM_ARM_SUBMOD
+		<< "] = { "
+		<< CAP_SUBMOD_INIT
+		;
+
+		for(unsigned long i = 1; i < 2*NUM_ARM_SUBMOD; i++)
+		{
+			double init_value = 0.0;
+
+			if(i < NUM_ARM_SUBMOD )
+			{
+				init_value = CAP_SUBMOD_INIT;
+			}
+			else
+			{
+				init_value = -CAP_SUBMOD_INIT;
+			}
+
+			sstrm << "," << init_value;
+		}
+
+		sstrm << " };\n";
+
+	};
+
+	generateVcxArrayField("Vca");
+	generateVcxArrayField("Vcb");
+	generateVcxArrayField("Vcc");
 
 	generateTypedTemporary<double>(sstrm, "real", "upa", 0.0);
 	generateTypedTemporary<double>(sstrm, "real", "upb", 0.0);
