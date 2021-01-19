@@ -35,7 +35,7 @@ Solver C++ Code Generation Tools are licensed under the GNU General Public Licen
 
 ## Literature 
   
-The ORTiS solver code generation tools themselves are presented in:
+**The ORTiS solver code generation tools themselves are presented in:**
 
 * M. Milton and A. Benigni, "ORTiS solver codegen: C++ code generation tools for high performance, FPGA-based, real-time simulation of power electronic systems," SoftwareX, vol. 13, Jan. 2021.
 doi: 10.1016/j.softx.2021.100660
@@ -45,7 +45,7 @@ url: https://www.sciencedirect.com/science/article/pii/S2352711021000054
 doi: 10.1109/ESTS.2019.8847940
 url: https://ieeexplore.ieee.org/document/8847940
 
-The code generation tools have been applied in the following recent work:
+**The code generation tools have been applied in the following recent work:**
 
 * M. Vygoder, M. Milton, J. Gudex, R. Cuzner, and A. Benigni, ``A Hardware-in-the-Loop Platform for DC Protection,'' IEEE Journal of Emerging and Selected Topics in Power Electronics, Aug. 2020, Early Access.
 doi:  10.1109/JESTPE.2020.3017769
@@ -63,13 +63,13 @@ url: https://ieeexplore.ieee.org/document/8927034
 doi:  10.1109/ESTS.2019.8847934
 url: https://ieeexplore.ieee.org/document/8847934
   
-The LB-LMC simulation solver algorithm applied in generated solvers was first proposed in:  
+**The LB-LMC simulation solver algorithm applied in generated solvers was first proposed in:**  
 
  * A. Benigni and A. Monti, "A Parallel Approach to Real-Time Simulation of Power Electronics Systems," in *IEEE Transactions on Power Electronics*, vol. 30, no. 9, pp. 5192-5206, Sept. 2015.
 doi: 10.1109/TPEL.2014.2361868
 url: https://ieeexplore.ieee.org/document/6918539
 
-FPGA execution of the LB-LMC solver algorithm is demonstrated in the following papers: 
+**FPGA execution of the LB-LMC solver algorithm is demonstrated in the following papers:** 
 
 * M. Difronzo, M. Milton, M. Davidson and A. Benigni, "Hardware-in-the-loop testing of high switching frequency power electronics converters," *2017 IEEE Electric Ship Technologies Symposium (ESTS)*, Arlington, VA, 2017, pp. 299-304.
 doi: 10.1109/ESTS.2017.8069297
