@@ -83,10 +83,10 @@ url: https://ieeexplore.ieee.org/document/7894204
 
 ## Acknowledgements
 * Matthew Milton (University of South Carolina) - solver codegen tools creator and lead developer
-* Andrea Benigni (FZ-Juelich) - original creator of the LB-LMC method
-* Michele Difronzo (University of South Carolina) - component model developer and software tester
+* Michele Difronzo (University of South Carolina) - component model developer
 * Dhiman Chowdhury (University of South Carolina) - component model developer
-* Mark Vygoder (University of Wisconsin-Milwaukee) - component model developer and software tester
+* Mark Vygoder (University of Wisconsin-Milwaukee) - component model developer
+* Andrea Benigni (FZ-Juelich) - original creator of the LB-LMC solver algorithm
 
 
 
