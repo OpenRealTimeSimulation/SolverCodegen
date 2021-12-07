@@ -583,7 +583,7 @@ if(arm_is_open_upper == 1) //solve for new states
 
 	der_il_now_upper = ONE_OVER_LARM * ( vstar_upper - il_upper_past*RARM - va_past_upper );
 
-	il_now_upper = 0.0;
+	il_now_upper = il_upper_past + DT*der_il_now_upper;
 
 	for(int i = 0; i < NUM_SM; i++)
 	{
@@ -778,7 +778,7 @@ if(arm_is_open_lower == 1) //solve for new states
 
 	der_il_now_lower = ONE_OVER_LARM * ( vstar_lower - il_lower_past*RARM - va_past_lower );
 
-	il_now_lower = 0.0;
+	il_now_lower = il_lower_past + DT*der_il_now_lower;
 
 	for(int i = 0; i < NUM_SM; i++)
 	{
