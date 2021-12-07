@@ -90,7 +90,7 @@ url: https://ieeexplore.ieee.org/document/7894204
 * Michele Difronzo (University of South Carolina) - component model developer
 * Dhiman Chowdhury (University of South Carolina) - component model developer
 * Mark Vygoder (University of Wisconsin-Milwaukee) - component model developer
-* Andrea Benigni (FZ-Juelich) - original creator of the LB-LMC solver algorithm
+* Andrea Benigni (FZ-Juelich, RWTH Aachen) - original creator of the LB-LMC solver algorithm
 
 
 
