@@ -33,6 +33,28 @@ High Level Synthesis (HLS) of C++ solvers into Register Transfer Level (RTL) des
 
 Solver C++ Code Generation Tools are licensed under the GNU General Public License (GPL) v3.0 (https://www.gnu.org/licenses/).
 
+## Getting Started
+
+To get started with the ORTiS Solver Codegen tools to generate electrical system solvers in C++ for simulation, we recommend to use the precompiled Command Line Interface (CLI) tool under Releases found here:
+https://github.com/OpenRealTimeSimulation/SolverCodegen/releases
+
+The CLI tool comes with a user guide which explains in detail how to use the tool and the generated solver code produced by the tool.  Electrical components supported by the tools is listed in the guide.  The current user guide for v0.9 of the tools is attached here for convenience:
+[ortis_codegen_cli_guide-0.9.pdf](https://github.com/OpenRealTimeSimulation/SolverCodegen/files/8312269/ortis_codegen_cli_guide-0.9.pdf)
+
+**In Summary**
+1. You write a netlist file describing the electrical system you wish to simulate, following the syntax supported by the Solver Codegen tools
+2. Then, call the CLI tool from the command prompt, passing the netlist file to the tool
+3. The CLI tool will then generate a C++ function template for the solver of the electrical system described in your netlist
+4. With the solver function template, you can run an offline simulation of the electrical system within a custom C++ testbench or from a simulation tool such as Mathworks Matlab/Simulink, Gnu Octave, Plexim PLECS, or many others that support C++ code.
+5. For real-time simulation, the solver C++ function templates can be compiled into executables for real-time CPUs, or high level synthesized into HDL cores for FPGA execution (Xilinx Vivado HLS).
+
+If you need references for C++, commercial simulators, and FPGA tools, see these third-party links:
+-  [C++ References](https://en.cppreference.com/w/)
+- [Simulink documentation](https://www.mathworks.com/help/simulink/)
+- [PLECS documentation](https://www.plexim.com/download/documentation)
+- [GNU Octave documentation](https://octave.org/doc/v6.4.0/)
+- [Xilinx Vivado high level synthesis documentation](https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0012-vivado-high-level-synthesis-hub.html)
+
 ## Literature 
   
 **The ORTiS solver code generation tools themselves are presented in:**
