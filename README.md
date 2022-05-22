@@ -69,6 +69,10 @@ url: https://ieeexplore.ieee.org/document/8847940
 
 **The code generation tools have been applied in the following recent work:**
 
+* M. Milton, M. Difronzo, D. Chowdhury, H. Ginn III, and A. Benigni, ``A Model of MMCs for Power Electronic System High-Performance Real-Time Simulation,''  2022 Open Source Modelling and Simulation of Energy Systems (OSMSES), Aachen, Germany, April 2022.
+doi: 10.1109/OSMSES54027.2022.9769141
+url: https://ieeexplore.ieee.org/document/9769141 
+
 * M. Difronzo, Md. M. Biswas, M. Milton, H. Ginn III, and A. Benigni, ``System Level Real-Time Simulation and Hardware-in-the-Loop Testing of MMCs,'' Energies, vol. 14, no. 11, May 2021.
 doi:  10.3390/en14113046 
 url: https://www.mdpi.com/1996-1073/14/11/3046
