@@ -67,6 +67,9 @@ url: https://www.sciencedirect.com/science/article/pii/S2352711021000054
 doi: 10.1109/ESTS.2019.8847940
 url: https://ieeexplore.ieee.org/document/8847940
 
+* G. De Carne, M. Milton, and A. Benigni, "Power Electronics Modelling for Real-Time Simulation," *PEDG 2022*, Kiel Germany, 2022, tutorial presentation.
+url (tutorial abstract): https://static1.squarespace.com/static/5e150338a651617a4e94cc84/t/6267b8206f3751239f03998b/1650964513068/05_Power_Electronics_Modelling.pdf
+
 **The code generation tools have been applied in the following recent work:**
 
 * M. Milton, M. Difronzo, D. Chowdhury, H. Ginn III, and A. Benigni, ``A Model of MMCs for Power Electronic System High-Performance Real-Time Simulation,''  2022 Open Source Modelling and Simulation of Energy Systems (OSMSES), Aachen, Germany, April 2022.
