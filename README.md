@@ -104,7 +104,7 @@ url: https://ieeexplore.ieee.org/document/8847934
 doi: 10.1109/TPEL.2014.2361868
 url: https://ieeexplore.ieee.org/document/6918539
 
-**FPGA execution of the LB-LMC solver algorithm is demonstrated in the following papers:** 
+**FPGA execution of the LB-LMC solver algorithm was first demonstrated in the following papers:** 
 
 * M. Difronzo, M. Milton, M. Davidson and A. Benigni, "Hardware-in-the-loop testing of high switching frequency power electronics converters," *2017 IEEE Electric Ship Technologies Symposium (ESTS)*, Arlington, VA, 2017, pp. 299-304.
 doi: 10.1109/ESTS.2017.8069297
