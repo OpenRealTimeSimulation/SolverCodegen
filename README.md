@@ -77,6 +77,8 @@ url (tutorial abstract): https://www.ieee-ecce.org/2022/wp-content/uploads/sites
 
 **The code generation tools have been applied in the following recent work:**
 
+* De la O Pérez, C. A.(2022). *Networked Digital Predictive Control for Modular DC-DC Converters*. (Doctoral dissertation). Retrieved from https://scholarcommons.sc.edu/etd/7005
+
 * M. Milton, M. Difronzo, D. Chowdhury, H. Ginn III, and A. Benigni, ``A Model of MMCs for Power Electronic System High-Performance Real-Time Simulation,''  2022 Open Source Modelling and Simulation of Energy Systems (OSMSES), Aachen, Germany, April 2022.
 doi: 10.1109/OSMSES54027.2022.9769141
 url: https://ieeexplore.ieee.org/document/9769141 
