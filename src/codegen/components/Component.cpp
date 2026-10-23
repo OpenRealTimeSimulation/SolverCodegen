@@ -119,6 +119,8 @@ Component::replaceTerminalConnectionNames(std::string& body, const std::vector<C
 	{
 		replaceTerminalConnectionNameWithIndex(body, terminal.label, terminal.node_index);
 	}
+	
+	return body;
 }
 
 std::string&
@@ -128,6 +130,8 @@ Component::replaceSourceNames(std::string& body, const std::vector<Component::So
 	{
 		replaceSourceNameWithSourceContributionVector(body, source.label, source.id);
 	}
+
+	return body;
 }
 
 

@@ -46,7 +46,7 @@ ModularMultilevelConverter_1LegHalfBridgeAntiParallelDiodes::setupFields()
 	{
 		{Field::PARAMETER, Field::REAL, "real", "DT", 1, dt},
 
-		{Field::PARAMETER, Field::INTEGER, "unsigned int", "NUM_SM", 1, num_sm_arm},
+		{Field::PARAMETER, Field::INTEGER, "unsigned int", "NUM_SM", 1, static_cast<double>(num_sm_arm)},
 
 		{Field::PARAMETER, Field::REAL, "real", "CSM", 1, csm},
 

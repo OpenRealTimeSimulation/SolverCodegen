@@ -369,7 +369,7 @@ public:
 			if(str->size() == 0)
 				return std::array<int,2>{-1,0};
 			else
-				return std::array<int,2>{0,str->size()};
+				return std::array<int,2>{0, static_cast<int>(str->size())};
 		}
 
 		int str_start = 0;
